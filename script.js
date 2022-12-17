@@ -90,7 +90,6 @@ function passwordOptions() {
     prompt(
       "How many characters should your password contain? Plese select a number between 8 and 128"
     ),
-    10
   );
   if (Number.isNaN(passwordLength)) {
     alert("Error: Pleae enter a number");
@@ -101,8 +100,8 @@ function passwordOptions() {
     return null;
   }
   let includeLower = confirm("Click OK to include lowercase characters.");
-  let includeUpper = confirm("Click OK to  include uppercase characters.");
-  let includeSpecial = confirm("Click OK to  include special characters.");
+  let includeUpper = confirm("Click OK to include uppercase characters.");
+  let includeSpecial = confirm("Click OK to include special characters.");
   let includeNumber = confirm("Click OK to include numeric characters.");
 
   if (
@@ -114,7 +113,7 @@ function passwordOptions() {
     alert("You must select at least one character type");
     return null;
   }
-let options = {
+let password = {
     passwordLength: passwordLength,
     includeLower: includeLower,
     includeUpper: includeUpper,
@@ -122,18 +121,68 @@ let options = {
     includeNumber:includeNumber,
 };
 
-return options
+return password
 }
 
-function generate() {}
+function randomItem(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    const randomItem = arr[randomIndex];
+
+    return randomItem;
+}
+
+function generate() {
+let options = passwordOptions();
+
+var result = [];
+
+var possibleCharacters = [];
+
+var guaranteedCharacters = [];
+
+if (!options) return null;
+
+if (options.includeSpecial) {
+  possibleCharacters = possibleCharacters.concat(specialCharacters);
+  guaranteedCharacters.push(getRandom(specialCharacters));
+}
+
+if (options.includeNumber) {
+  possibleCharacters = possibleCharacters.concat(numbers);
+  guaranteedCharacters.push(getRandom(numbers));
+}
+
+if (options.includeLower) {
+  possibleCharacters = possibleCharacters.concat(lowerCased);
+  guaranteedCharacters.push(getRandom(lowerCased));
+}
+
+if (options.includeUpper) {
+  possibleCharacters = possibleCharacters.concat(upperCased);
+  guaranteedCharacters.push(getRandom(upperCased));
+}
+
+for (var i = 0; i < options.length; i++) {
+  var possibleCharacter = getRandom(possibleCharacters);
+
+  result.push(possibleCharacter);
+}
+
+for (var i = 0; i < guaranteedCharacters.length; i++) {
+  result[i] = guaranteedCharacters[i];
+}
+
+return result.join('');
+}
+
 
 var generateBtn = document.querySelector("#generate");
 
 function writePassword() {
-  var password = generatePassword();
+  var password = generate();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 }
 
-generateBtn.addEventListener("click", passwordOptions);
+generateBtn.addEventListener("click", writePassword);
