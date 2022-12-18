@@ -1,4 +1,3 @@
-// Assignment Code
 const lowerCased = [
   "a",
   "b",
@@ -89,7 +88,7 @@ function passwordOptions() {
   let passwordLength = parseInt(
     prompt(
       "How many characters should your password contain? Plese select a number between 8 and 128"
-    ),
+    )
   );
   if (Number.isNaN(passwordLength)) {
     alert("Error: Pleae enter a number");
@@ -113,68 +112,75 @@ function passwordOptions() {
     alert("You must select at least one character type");
     return null;
   }
-let password = {
+  let password = {
     passwordLength: passwordLength,
     includeLower: includeLower,
     includeUpper: includeUpper,
     includeSpecial: includeSpecial,
-    includeNumber:includeNumber,
-};
+    includeNumber: includeNumber,
+  };
 
-return password
+  return password;
 }
 
-function randomItem(arr) {
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    const randomItem = arr[randomIndex];
+///function randomItem(arr) {
+  //const randomIndex = Math.floor(Math.random() * arr.length);
+  //const randomItem = arr[randomIndex];
 
-    return randomItem;
-}
+  //return randomItem;
+//}
 
 function generate() {
-let options = passwordOptions();
+  let options = passwordOptions();
 
-var result = [];
+  var result = [];
 
-var possibleCharacters = [];
+  var possibleCharacters = [];
 
-var guaranteedCharacters = [];
+  var guaranteedCharacters = [];
 
-if (!options) return null;
+  if (!options) return null;
 
-if (options.includeSpecial) {
-  possibleCharacters = possibleCharacters.concat(specialCharacters);
-  guaranteedCharacters.push(getRandom(specialCharacters));
+  if (options.includeSpecial) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    guaranteedCharacters.push(
+      specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+    );
+  }
+
+  if (options.includeNumber) {
+    possibleCharacters = possibleCharacters.concat(numbers);
+    guaranteedCharacters.push(
+      numbers[Math.floor(Math.random() * numbers.length)]
+    );
+  }
+
+  if (options.includeLower) {
+    possibleCharacters = possibleCharacters.concat(lowerCased);
+    guaranteedCharacters.push(
+      lowerCased[Math.floor(Math.random() * lowerCased.length)]
+    );
+  }
+
+  if (options.includeUpper) {
+    possibleCharacters = possibleCharacters.concat(upperCased);
+    guaranteedCharacters.push(
+      upperCased[Math.floor(Math.random() * upperCased.length)]
+    );
+  }
+
+  for (var i = 0; i < options.length; i++) {
+    var possibleCharacter = possibleCharacter[Math.floor(Math.random() * possibleCharacter.length)];
+
+    result.push(possibleCharacter);
+  }
+
+  for (var i = 0; i < guaranteedCharacters.length; i++) {
+    result[i] = guaranteedCharacters[i];
+  }
+
+  return result.join("");
 }
-
-if (options.includeNumber) {
-  possibleCharacters = possibleCharacters.concat(numbers);
-  guaranteedCharacters.push(getRandom(numbers));
-}
-
-if (options.includeLower) {
-  possibleCharacters = possibleCharacters.concat(lowerCased);
-  guaranteedCharacters.push(getRandom(lowerCased));
-}
-
-if (options.includeUpper) {
-  possibleCharacters = possibleCharacters.concat(upperCased);
-  guaranteedCharacters.push(getRandom(upperCased));
-}
-
-for (var i = 0; i < options.length; i++) {
-  var possibleCharacter = getRandom(possibleCharacters);
-
-  result.push(possibleCharacter);
-}
-
-for (var i = 0; i < guaranteedCharacters.length; i++) {
-  result[i] = guaranteedCharacters[i];
-}
-
-return result.join('');
-}
-
 
 var generateBtn = document.querySelector("#generate");
 
