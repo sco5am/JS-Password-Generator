@@ -87,7 +87,8 @@ const specialCharacters = [
 function passwordOptions() {
   let passwordLength = parseInt(
     prompt(
-      "How many characters should your password contain? Plese select a number between 8 and 128")
+      "How many characters should your password contain? Plese select a number between 8 and 128"
+    )
   );
   if (Number.isNaN(passwordLength)) {
     alert("Error: Pleae enter a number");
@@ -122,13 +123,6 @@ function passwordOptions() {
   return password;
 }
 
-function randomItem(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  const randomItem = arr[randomIndex];
-
-  return randomItem;
-}
-
 function generate() {
   let options = passwordOptions();
 
@@ -142,14 +136,15 @@ function generate() {
 
   if (options.includeSpecial) {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
-    guaranteedCharacters.push(specialCharacters[Math.floor(Math.random() * specialCharacters.length)],
-    console.log('working')
+    guaranteedCharacters.push(
+      specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
     );
   }
 
   if (options.includeNumber) {
     possibleCharacters = possibleCharacters.concat(numbers);
-    guaranteedCharacters.push(numbers[Math.floor(Math.random() * numbers.length)]
+    guaranteedCharacters.push(
+      numbers[Math.floor(Math.random() * numbers.length)]
     );
   }
 
@@ -166,16 +161,17 @@ function generate() {
       upperCased[Math.floor(Math.random() * upperCased.length)]
     );
   }
-    for (var i = 0; i < options.length; i++) {
-      var possibleCht = randomItem(possibleCharacters);
-  
-      result.push(possibleCht);
-    }
-    for (var i = 0; i < guaranteedCharacters.length; i++) {
-      result[i] = guaranteedCharacters[i];
-    }
-    return result.join('');
+  for (var i = 0; i < options.passwordLength; i++) {
+    var possibleCht =
+      possibleCharacters[Math.floor(Math.random() * possibleCharacters.length)];
+
+    result.push(possibleCht);
   }
+  for (var i = 0; i < guaranteedCharacters.length; i++) {
+    result[i] = guaranteedCharacters[i];
+  }
+  return result.join("");
+}
 
 var generateBtn = document.querySelector("#generate");
 
@@ -187,3 +183,5 @@ function writePassword() {
 }
 
 generateBtn.addEventListener("click", writePassword);
+
+console.log(document.scripts);
