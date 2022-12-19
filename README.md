@@ -1,4 +1,4 @@
-# JS-Password-Generator
+# Random Password Generator (Javascript)
 
 ## Description
 
@@ -11,9 +11,9 @@ This project helped me to better familiarize myself with javascript, specificall
 
 The live site can be viewd at the following link: https://sco5am.github.io/JS-Password-Generator/
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+The Page will look as follows:
+
+   ![Preview](./Assets/Password%20Generator%20(1).png) 
 
 
 ## License
