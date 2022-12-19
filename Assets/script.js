@@ -169,7 +169,7 @@ function generate() {
   }
   for (var i = 0; i < guaranteedCharacters.length; i++) {
     result[i] = guaranteedCharacters[i];
-  }
+ }
   return result.join("");
 }
 
