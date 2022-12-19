@@ -183,5 +183,3 @@ function writePassword() {
 }
 
 generateBtn.addEventListener("click", writePassword);
-
-console.log(document.scripts);
